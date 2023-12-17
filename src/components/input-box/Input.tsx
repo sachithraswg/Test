@@ -31,7 +31,6 @@ const Input: React.FC<InputProps> = ({ nodes, focusedId, onFocus, onAddNode, onD
       <div className="input-wrapper">
         <span>
           <input
-          value={nodes.id}
             className="input"
             onClick={() => onFocus(nodes.id)}
             readOnly={state.isDisabled}
