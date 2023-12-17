@@ -28,7 +28,7 @@ const PortTemplate: React.FC<any> = () => {
   }
 
   function handleDelete(parentId: number) {
-    setState((prevNodes) => ({...prevNodes, nodes: deleteNodeRecursively(prevNodes.nodes, parentId)}));
+    setState((prevNodes) => ({...prevNodes, focusedId: 0, nodes: deleteNodeRecursively(prevNodes.nodes, parentId)}));
   }
 
   function handleAddNode(parentId: number) {

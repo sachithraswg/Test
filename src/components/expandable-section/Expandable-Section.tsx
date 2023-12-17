@@ -11,10 +11,10 @@ interface ExpandableSectionState {
 }
 
 const ExpandableSection: React.FC<ExpandableSectionProps> = ({title, children = 'No Content Provided.'}) => {
-  const [isExpanded, setExpanded] = useState<ExpandableSectionState>({isExpanded: false});
+  const [state, setState] = useState<ExpandableSectionState>({isExpanded: false});
 
   const handleToggle = () => {
-    setExpanded(prevState => ( {isExpanded: !prevState.isExpanded} ));
+    setState(prevState => ( {isExpanded: !prevState.isExpanded} ));
   }
 
   return (
@@ -22,10 +22,10 @@ const ExpandableSection: React.FC<ExpandableSectionProps> = ({title, children = 
       <div className="btn-header" onClick={handleToggle}>
         <span className="title"> {title} </span>
         <span className="circular-btn">
-          <i className={isExpanded ? "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down"}></i>
+          <i className={state.isExpanded ? "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down"}></i>
         </span>
       </div>
-      {<div className="view-container" style={{display: isExpanded ? 'block': 'none'}}>
+      {<div className="view-container" style={{display: state.isExpanded ? 'block': 'none'}}>
         {children}
       </div>}
     </>
