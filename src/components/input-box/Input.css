@@ -1,0 +1,66 @@
+.node-container {
+  height: 32px;
+  width: 128px;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 26px;
+}
+
+.text-input {
+  height: 32px;
+  width: 128px;
+}
+
+.node-child {
+  display: block;
+  position: relative;
+  left: 40%;
+  top: 90%;
+}
+
+.node-container::before {
+  content: "";
+  width: 50px;
+  height: 50px;
+  background-color: none;
+  left: -50px;
+  top: -30px;
+  border: 0px;
+  border-left: 1px;
+  border-bottom: 1px;
+  border-color: black;
+  border-style: solid;
+  position: absolute;
+  display: block;
+}
+
+.node-container.top-most::before {
+  content: "";
+  width: 50px;
+  /* height: 50px; */
+  background-color: none;
+  left: -50px;
+  top: 50%;
+  border: 0px;
+  border-top: 1px;
+  border-color: black;
+  border-style: solid;
+  position: absolute;
+  display: block;
+}  
+
+.input-wrapper {
+
+}
+
+.input {
+  width: 100px;
+  height: 32px;
+  margin-top: 8px;
+}
+
+.disable-icon {
+  position: relative;
+  left: -20px;
+  color: #e1e1e1;
+}

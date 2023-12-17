@@ -1,0 +1,39 @@
+.btn-header {
+  display: flex;
+  background-color: #f1f3f4;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  height: 40px;
+  align-items: center;
+}
+
+.view-container {
+  margin: 20px;
+}
+
+.title {
+  font-weight: 500;
+  padding-left: 10px;
+}
+
+.circular-btn {
+  width: 40px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.down-arrow {
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 12px solid black;
+}
+
+.up-arrow {
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 12px solid black;
+}

@@ -1,0 +1,13 @@
+.search-box {
+  height: 100%;
+  width: 300px;
+  box-sizing: border-box;
+  background-color: #673ea7;
+  border: none;
+  margin: -3px;
+}
+
+input::placeholder {
+  color: #fff;
+  padding: 6px;
+}
