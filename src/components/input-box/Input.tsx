@@ -5,10 +5,10 @@ import { InputNode } from "../../models/InputNode";
 
 interface InputProps {
   nodes: InputNode, 
-  focusedId: number, 
-  onFocus: (parentId: number) => void, 
-  onAddNode: (parentId: number) => void, 
-  onDeleteNode: (parentId: number) => void
+  focusedId: string, 
+  onFocus: (parentId: string) => void, 
+  onAddNode: (parentId: string) => void, 
+  onDeleteNode: (parentId: string) => void
 }
 
 interface InputState {
@@ -31,6 +31,7 @@ const Input: React.FC<InputProps> = ({ nodes, focusedId, onFocus, onAddNode, onD
       <div className="input-wrapper">
         <span>
           <input
+          value={nodes.id}
             className="input"
             onClick={() => onFocus(nodes.id)}
             readOnly={state.isDisabled}

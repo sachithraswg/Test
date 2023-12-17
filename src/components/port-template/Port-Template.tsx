@@ -4,38 +4,57 @@ import Input from "./../input-box/Input";
 import { InputNode, InputNodeClass } from "../../models/InputNode";
 
 interface PortTemplateState {
-  focusedId: number;
+  focusedId: string;
   nodes: InputNode[];
 }
 
 const PortTemplate: React.FC<any> = () => {
-  const [state, setState] = useState<PortTemplateState>({focusedId: 0, nodes: []});
+  const [state, setState] = useState<PortTemplateState>({focusedId: '', nodes: []});
 
   const addNode = () => {
     if ( !!state.focusedId ) {
       handleAddNode(state.focusedId);
     } else {
+      let id = state.nodes && state.nodes.length > 0 ? state.nodes[state.nodes.length - 1].id + 1 : 0;
       let newNodes = [
         ...state.nodes,
-        new InputNodeClass(new Date().getTime(), ''),
+        new InputNodeClass(nextIdGenerator(null), ''),
       ];
       setState((prevState) => ({...prevState, nodes: newNodes } ));
     }
   }
 
-  function handleFocus(parentId: number) {
+  function nextIdGenerator( parentNode: InputNode | null ): string {
+    if ( !parentNode ) {
+      if ( state.nodes.length === 0 ) {
+        return '0';
+      } else {
+        return '' + (parseInt(state.nodes[state.nodes.length - 1].id) + 1);
+      }
+    } else {
+      if ( parentNode.child.length > 0 ) {
+        let idParts = parentNode.child[parentNode.child.length -1].id.split('.');
+        idParts[idParts.length -1] = ''+(parseInt(idParts[idParts.length - 1]) + 1);
+        return idParts.join('.');
+      } else {
+        return parentNode.id + ".0"
+      }
+    }
+  }
+
+  function handleFocus(parentId: string) {
     setState(prevState => ({...prevState, focusedId: parentId}));
   }
 
-  function handleDelete(parentId: number) {
-    setState((prevNodes) => ({...prevNodes, focusedId: 0, nodes: deleteNodeRecursively(prevNodes.nodes, parentId)}));
+  function handleDelete(parentId: string) {
+    setState((prevNodes) => ({...prevNodes, focusedId: '', nodes: deleteNodeRecursively(prevNodes.nodes, parentId)}));
   }
 
-  function handleAddNode(parentId: number) {
+  function handleAddNode(parentId: string) {
     setState((prevNodes) => ({...prevNodes, nodes: updateNodeRecursively(prevNodes.nodes, parentId)}));
   }
 
-  function deleteNodeRecursively(nodes: InputNode[], parentId: number) {
+  function deleteNodeRecursively(nodes: InputNode[], parentId: string) {
     let x = nodes.filter((node) => {
       if (node.id === parentId) {
         return false;
@@ -47,14 +66,14 @@ const PortTemplate: React.FC<any> = () => {
     return x;
   }
 
-  function updateNodeRecursively(nodes: InputNode[], parentId: number): any {
+  function updateNodeRecursively(nodes: InputNode[], parentId: string): any {
     return nodes.map((node) => {
       if (node.id === parentId) {
         return {
           ...node,
           child: [
             ...node.child,
-            new InputNodeClass(new Date().getTime(), ''),
+            new InputNodeClass(nextIdGenerator(node), ''),
           ],
         };
       } else if (node.child && node.child.length > 0) {
